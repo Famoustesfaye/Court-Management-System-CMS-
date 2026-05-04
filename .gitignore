@@ -1,0 +1,15 @@
+# Node module folders
+node_modules
+/frontend/node_modules
+/backend/node_modules
+
+# Build artifacts and temporary files
+images
+Text.txt
+
+# Backup and upload data directories
+BackUp/
+backend/uploads/
+
+# Duplicate or generated lockfile copies
+backend/package-lock - Copy.json
