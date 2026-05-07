@@ -150,14 +150,14 @@ Please follow the existing code style and include tests where applicable.
 
 ## License
 
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+
 
 ## Contact
 
 For questions, support, or feedback, please contact:
 
-- **Email**: support@cms.com
-- **GitHub Issues**: [Create an issue](https://github.com/your-repo/issues)
+- **Email**: tesfayefamous@gmail.com
+- **GitHub Issues**: [Create an issue] ( https://github.com/Famoustesfaye/Court-Management-System-CMS- )
 
 ## Screenshots
 
