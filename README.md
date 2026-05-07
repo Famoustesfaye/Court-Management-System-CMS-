@@ -157,16 +157,24 @@ Please follow the existing code style and include tests where applicable.
 For questions, support, or feedback, please contact:
 
 - **Email**: tesfayefamous@gmail.com
+<<<<<<< HEAD
 - **GitHub Issues**: [Create an issue] ( https://github.com/Famoustesfaye/Court-Management-System-CMS- )
+=======
+- **GitHub Issues**: [Create an issue](https://github.com/Famoustesfaye/Court-Management-System-CMS-)
+>>>>>>> dd84c61 (Update README and add latest screenshots)
 
 ## Screenshots
 
 *(Add screenshots here if available)*
 
 - Dashboard View
-- Case Management Interface
-- Appointment Scheduler
 
+
+!login page [alt text](<Screenshot 2026-05-07 220411.png>)
+!registrar [alt text](<Screenshot 2026-05-07 221012.png>)
+!admin page [alt text](<Screenshot 2026-05-07 220713.png>)
+!judge [alt text](<Screenshot 2026-05-07 221453.png>)
+1Document analayzer [alt text](<Screenshot 2026-05-07 221323.png>)
 ## Acknowledgments
 
 - Thanks to the open-source community for the libraries and tools used.
