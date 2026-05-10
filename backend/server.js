@@ -183,7 +183,7 @@ app.get("/api/getUsers", async (req, res) => {
   await Getuser(db, req, res); // FIXED: Added db parameter
 });
 
-app.get("/api/proscutorcasedocuments", async (req, res) => {
+app.post("/api/proscutorcasedocuments", async (req, res) => {
   await fetchAllProsecutorDocuments(db, req, res); // FIXED: Added db parameter
 });
 app.post("/api/getUserbyid", async (req, res) => {
@@ -217,8 +217,9 @@ app.post("/api/fetchcasebyproscutor", async (req, res) => {
 });
 app.post("/api/fetchproscutorcases", async (req, res) => {
   await FethcProscutorDocuments(db, req, res); // FIXED: Added db parameter
-});
-app.get("/api/getCaseTypeGrid", async (req, res) => {
+});app.get("/api/proscutorcasedocuments", async (req, res) => {
+  await fetchAllProsecutorDocuments(db, req, res); // Allow GET requests without prosecutorId to fetch all documents
+});app.get("/api/getCaseTypeGrid", async (req, res) => {
   await FetchCaseTypeGrid(db, req, res); // FIXED: Added db parameter
 });
 

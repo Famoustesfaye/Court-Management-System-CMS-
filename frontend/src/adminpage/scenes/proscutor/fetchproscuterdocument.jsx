@@ -35,7 +35,7 @@ const ProscutoreDocuments = () => {
       const prosecutorId = decodedToken.userId; // Get the userId from the decoded JWT token
 
       const response = await fetch(
-        "http://localhost:8081/api/fetchproscutorcases",
+        "http://localhost:8081/api/proscutorcasedocuments",
         {
           method: "POST",
           headers: {
@@ -46,7 +46,7 @@ const ProscutoreDocuments = () => {
       );
 
       const data = await response.json();
-      console.log("data", data);
+      console.log("Prosecutor documents data:", data);
       setDocuments(data);
     } catch (error) {
       console.error("Error fetching documents:", error);
@@ -216,6 +216,7 @@ const ProscutoreDocuments = () => {
           rows={documents}
           columns={columns}
           components={{ Toolbar: GridToolbar }}
+          getRowId={(row) => row.id}
         />
         {/* Snackbar Component */}
         <Snackbar

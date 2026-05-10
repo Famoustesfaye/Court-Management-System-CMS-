@@ -41,14 +41,26 @@ const ProscutorCases = () => {
   const fetchDocuments = async () => {
     try {
       const response = await fetch(
-        "http://localhost:8081/api/proscutorcasedocuments" // Update the route here
+        "http://localhost:8081/api/proscutorcasedocuments"
       );
       const data = await response.json();
-      setDocuments(data);
-      setProsecutorID(data[0].prosecutor_id);
-      console.log(data);
+      const docs = Array.isArray(data)
+        ? data
+        : Array.isArray(data?.data)
+        ? data.data
+        : Array.isArray(data?.documents)
+        ? data.documents
+        : [];
+      if (!Array.isArray(data)) {
+        console.warn("Unexpected prosecutor documents response shape", data);
+      }
+      setDocuments(docs);
+      setProsecutorID(docs.length ? docs[0].prosecutor_id : null);
+      console.log(docs);
     } catch (error) {
       console.error("Error fetching documents:", error);
+      setDocuments([]);
+      setProsecutorID(null);
     }
   };
 
@@ -125,14 +137,15 @@ const ProscutorCases = () => {
 
       {/* Display documents as cards */}
       <Grid container spacing={3}>
-        {documents.map((doc, result) => (
-          <Grid item xs={12} sm={12} lg={6} xl={6} key={doc.id}>
-            <Card
-              sx={{
-                padding: 0,
-                boxShadow: "40",
-              }}
-            >
+        {Array.isArray(documents) && documents.length > 0 &&
+          documents.map((doc, result) => (
+            <Grid item xs={12} sm={12} lg={6} xl={6} key={doc.id}>
+              <Card
+                sx={{
+                  padding: 0,
+                  boxShadow: "40",
+                }}
+              >
               <CardContent
                 sx={{
                   backgroundColor: colors.primary[400],
