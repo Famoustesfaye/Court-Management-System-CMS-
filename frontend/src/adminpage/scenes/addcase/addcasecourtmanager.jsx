@@ -486,7 +486,7 @@ const AddCourtRegistrarCase = () => {
                               </>
                             )}
 
-                            {caseData.first_name !== null &&
+                            {caseData.judge_first_name !== null &&
                               caseData.case_status === "running" && (
                                 // Render select dropdown to choose a judge
                                 <>
@@ -535,7 +535,7 @@ const AddCourtRegistrarCase = () => {
 
                             {caseData.is_paid === "Paid" && (
                               <>
-                                {caseData.first_name === null ? (
+                                {caseData.judge_first_name === null ? (
                                   // Render select dropdown to choose a judge
                                   <>
                                     <TextField
@@ -597,7 +597,7 @@ const AddCourtRegistrarCase = () => {
                                         fontWeight: "bold",
                                         fontSize: "1.1em",
                                       }}
-                                    >{` ${caseData.id} / ${caseData.first_name}/ ${caseData.last_name}`}</span>
+                                    >{` ${caseData.judge_id} / ${caseData.judge_first_name} / ${caseData.judge_last_name}`}</span>
                                   </Typography>
                                 )}
                               </>

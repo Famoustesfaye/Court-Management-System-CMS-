@@ -52,10 +52,10 @@ const CourtManagerDashboard = () => {
     (caseData) => caseData.case_type === "criminal"
   ).length;
   const notAssignedCount = fetchedCases.filter(
-    (caseData) => caseData.first_name === null
+    (caseData) => caseData.judge_first_name === null
   ).length;
   const AssignedCount = fetchedCases.filter(
-    (caseData) => caseData.first_name !== null
+    (caseData) => caseData.judge_first_name !== null
   ).length;
   const civilcasePercentage = ((CivilCase / totalCount) * 100).toFixed(2);
   const criminalcasePercentage = ((CriminalCase / totalCount) * 100).toFixed(2);

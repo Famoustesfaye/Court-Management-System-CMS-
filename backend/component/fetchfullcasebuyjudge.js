@@ -95,6 +95,7 @@ LEFT JOIN
     otherdocumentcases odc ON c.case_id = odc.case_id
 WHERE 
     c.assigned_judge = ?
+GROUP BY c.case_id
 ORDER BY c.case_id
 `;
 

@@ -753,7 +753,7 @@ const AddCase = () => {
                                 "N/A"
                               )}
                             </Typography>
-                            {caseData.id && caseData.first_name ? (
+                            {caseData.judge_id && caseData.judge_first_name ? (
                               <Typography
                                 variant="h4"
                                 margin={1}
@@ -771,7 +771,7 @@ const AddCase = () => {
                                     fontSize: "1.1em",
                                   }}
                                 >
-                                  {`${caseData.id} / ${caseData.first_name} / ${caseData.last_name}`}
+                                  {`${caseData.judge_id} / ${caseData.judge_first_name} / ${caseData.judge_last_name}`}
                                 </span>
                               </Typography>
                             ) : (

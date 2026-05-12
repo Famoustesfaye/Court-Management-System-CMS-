@@ -1,15 +1,29 @@
 const assignJudgeToCase = async (db, req, res) => {
-  console.log("POST request received at /api/assignJudgeToCase");
+  console.log("POST request received at /api/judgeassign");
 
   // Extracting data from request body
   const assignedJudge = req.body.selectedJudgeId;
   const caseId = req.body.selectedCaseId;
+
+  if (!assignedJudge || !caseId) {
+    return res.status(400).json({
+      error: "selectedJudgeId and selectedCaseId are required",
+    });
+  }
+
   try {
     // Update the cases table with the assigned judge
     const updateResult = await db.query(
       "UPDATE cases SET assigned_judge = ? WHERE case_id = ?",
       [assignedJudge, caseId]
     );
+
+    if (!updateResult || updateResult.affectedRows === 0) {
+      return res.status(404).json({
+        error: "Case not found or judge not assigned",
+      });
+    }
+
     const sqlInsert =
       "INSERT INTO notifications (user_id, message) VALUES (?, ?)";
     db.query(
@@ -28,8 +42,6 @@ const assignJudgeToCase = async (db, req, res) => {
         res.json({ message: "Assigned judge to case successfully" });
       }
     );
-
-    res.json({ message: "Assigned judge to case successfully" });
   } catch (error) {
     console.error("Error assigning judge to case: ", error);
     res.status(500).json({ error: "Internal Server Error" });

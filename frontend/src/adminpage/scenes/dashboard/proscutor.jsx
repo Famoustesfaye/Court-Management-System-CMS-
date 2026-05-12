@@ -73,10 +73,10 @@ const ProscutorDashboard = () => {
     (caseData) => caseData.case_type === "criminal"
   ).length;
   const notAssignedCount = fetchedCases.filter(
-    (caseData) => caseData.first_name === null
+    (caseData) => caseData.judge_first_name === null
   ).length;
   const AssignedCount = fetchedCases.filter(
-    (caseData) => caseData.first_name !== null
+    (caseData) => caseData.judge_first_name !== null
   ).length;
 
   const closedPercentage = ((closedCount / totalCount) * 100).toFixed(2);
@@ -150,9 +150,8 @@ const ProscutorDashboard = () => {
 
       // Iterate over cases to find corresponding judge
       const casesWithJudges = cases.map((caseData) => {
-        const judge = cases.find((judge) => judge.id === caseData.id);
-        const judgeName = judge
-          ? `${caseData.first_name} ${caseData.last_name}`
+        const judgeName = caseData.judge_first_name
+          ? `${caseData.judge_first_name} ${caseData.judge_last_name}`
           : "N/A";
         return {
           ...caseData,
@@ -465,3 +464,4 @@ const ProscutorDashboard = () => {
 };
 
 export default ProscutorDashboard;
+
