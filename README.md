@@ -157,11 +157,7 @@ Please follow the existing code style and include tests where applicable.
 For questions, support, or feedback, please contact:
 
 - **Email**: tesfayefamous@gmail.com
-<<<<<<< HEAD
-- **GitHub Issues**: [Create an issue] ( https://github.com/Famoustesfaye/Court-Management-System-CMS- )
-=======
 - **GitHub Issues**: [Create an issue](https://github.com/Famoustesfaye/Court-Management-System-CMS-)
->>>>>>> dd84c61 (Update README and add latest screenshots)
 
 ## Screenshots
 
@@ -178,4 +174,4 @@ For questions, support, or feedback, please contact:
 ## Acknowledgments
 
 - Thanks to the open-source community for the libraries and tools used.
-- Special thanks to contributors and testers." 
+- Special thanks to contributors and testers.
