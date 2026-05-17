@@ -5,13 +5,12 @@ const FetchCasesByProsecutor = async (db, req, res) => {
   if (!prosecutorId) {
     return res.status(400).json({
       error: "Prosecutor ID is required",
-      message: "Please provide prosecutorId in the request body"
+      message: "Please provide prosecutorId in the request body",
     });
   }
 
   try {
     const query = `
-<<<<<<< Updated upstream
       SELECT
         c.case_id,
         c.case_type,
@@ -73,87 +72,6 @@ const FetchCasesByProsecutor = async (db, req, res) => {
       WHERE pc.prosecutor_id = ?
       ORDER BY c.case_id;
     `;
-=======
-    SELECT
-    c.case_id,
-    c.case_type,
-    c.file_path,
-    c.description,
-    c.policeStation,
-    c.FIRNumber,
-    c.FIRDate,
-    c.registrationDate,
-    u.id as judge_id,
-    u.first_name as judge_first_name,
-    u.last_name as judge_last_name,
-    c.case_status,
-    c.judge_decision,
-    c.is_paid,
-    GROUP_CONCAT(DISTINCT pc.client_id) AS petitioner_client_ids,
-    GROUP_CONCAT(DISTINCT pc.advocator_id) AS petitioner_advocator_ids,
-    GROUP_CONCAT(DISTINCT rc.client_id) AS respondent_client_ids,
-    GROUP_CONCAT(DISTINCT rc.advocator_id) AS respondent_advocator_ids,
-    GROUP_CONCAT(DISTINCT cs.sub_type_name) AS sub_type_names,
-    -- Petitioner information
-    pc_client.id as petitioner_id,
-    pc_client.first_name as petitioner_first_name,
-    pc_client.middle_name as petitioner_middle_name,
-    pc_client.last_name as petitioner_last_name,
-    pc_client.email as petitioner_email,
-    pc_client.address as petitioner_address,
-    pc_client.mobile_number as petitioner_mobile,
-    -- Respondent information
-    rc_client.id as respondent_id,
-    rc_client.first_name as respondent_first_name,
-    rc_client.middle_name as respondent_middle_name,
-    rc_client.last_name as respondent_last_name,
-    rc_client.email as respondent_email,
-    rc_client.address as respondent_address,
-    rc_client.mobile_number as respondent_mobile,
-    -- Advocate information
-    pa.advocator_id as petitioner_advocate_id,
-    pa.first_name as petitioner_advocate_first_name,
-    pa.last_name as petitioner_advocate_last_name,
-    ra.advocator_id as respondent_advocate_id,
-    ra.first_name as respondent_advocate_first_name,
-    ra.last_name as respondent_advocate_last_name,
-    -- Prosecutor info
-    prosecutor.id as prosecutor_id,
-    prosecutor.first_name as prosecutor_first_name,
-    prosecutor.last_name as prosecutor_last_name,
-    prosecutor.role as prosecutor_role,
-    -- Document info
-    odc.id as document_id,
-    odc.file_path as document_file_path,
-    odc.description as document_description
-FROM 
-    cases c
-LEFT JOIN 
-    petitioner_case_map pc ON c.case_id = pc.case_id
-LEFT JOIN 
-    respondent_case_map rc ON c.case_id = rc.case_id
-LEFT JOIN 
-    case_sub_type cs ON c.case_id = cs.case_id
-LEFT JOIN 
-    clients pc_client ON pc.client_id = pc_client.id
-LEFT JOIN 
-    clients rc_client ON rc.client_id = rc_client.id
-LEFT JOIN 
-    users u ON c.assigned_judge = u.id 
-LEFT JOIN 
-    advocators pa ON pc.advocator_id = pa.advocator_id
-LEFT JOIN 
-    advocators ra ON rc.advocator_id = ra.advocator_id
-LEFT JOIN 
-    users prosecutor ON pc.prosecutor_id = prosecutor.id
-LEFT JOIN 
-    otherdocumentcases odc ON c.case_id = odc.case_id
-WHERE 
-    pc.prosecutor_id = ?
-GROUP BY c.case_id
-ORDER BY c.case_id
-      `;
->>>>>>> Stashed changes
 
     const [results] = await db.query(query, [prosecutorId]);
 
@@ -234,7 +152,7 @@ ORDER BY c.case_id
 
       if (
         row.petitioner_id &&
-        !currentCase.petitioners_info.find((p) => p.id === row.petitioner_id)
+        !currentCase.petitioners_info.find((petitioner) => petitioner.id === row.petitioner_id)
       ) {
         currentCase.petitioners_info.push({
           id: row.petitioner_id,
@@ -249,7 +167,7 @@ ORDER BY c.case_id
 
       if (
         row.respondent_id &&
-        !currentCase.respondents_info.find((r) => r.id === row.respondent_id)
+        !currentCase.respondents_info.find((respondent) => respondent.id === row.respondent_id)
       ) {
         currentCase.respondents_info.push({
           id: row.respondent_id,
@@ -289,7 +207,7 @@ ORDER BY c.case_id
 
       if (
         row.document_id &&
-        !currentCase.other_documents_info.find((d) => d.id === row.document_id)
+        !currentCase.other_documents_info.find((document) => document.id === row.document_id)
       ) {
         currentCase.other_documents_info.push({
           id: row.document_id,
@@ -301,10 +219,10 @@ ORDER BY c.case_id
 
     const finalResults = Object.values(groupedResults);
     console.log(`Found ${finalResults.length} cases for prosecutor ${prosecutorId}`);
-    res.json(finalResults);
+    return res.json(finalResults);
   } catch (error) {
     console.error("Error fetching cases by prosecutor:", error);
-    res.status(500).json({ error: "Internal Server Error" });
+    return res.status(500).json({ error: "Internal Server Error" });
   }
 };
 
